@@ -1,1 +1,16 @@
+class Solution {
+public:
+    int diagonalSum(vector<vector<int>>& mat) {
+        int n = mat.size();
+        int total = 0;
+        for (int i = 0; i < n; i++) {
+            total += mat[i][i];             // primary diagonal
+            total += mat[i][n - i - 1];     // secondary diagonal
+        }
+        if (n % 2 == 1) {                   // subtract center if counted twice
+            total -= mat[n / 2][n / 2];
+        }
+        return total;
+    }
+};
 
