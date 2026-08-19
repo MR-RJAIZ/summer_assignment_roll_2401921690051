@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        vector<int> st;
+
+        for (int el : asteroids) {
+
+            bool alive = true;
+
+            while (!st.empty() && el < 0 && st.back() > 0) {
+
+                if (st.back() < -el) {
+                    // Stack asteroid is smaller
+                    st.pop_back();
+                }
+                else if (st.back() == -el) {
+                    // Both destroy
+                    st.pop_back();
+                    alive = false;
+                    break;
+                }
+                else {
+                    // Current asteroid is smaller
+                    alive = false;
+                    break;
+                }
+            }
+
+            if (alive) {
+                st.push_back(el);
+            }
+        }
+
+        return st;
+    }
+};
