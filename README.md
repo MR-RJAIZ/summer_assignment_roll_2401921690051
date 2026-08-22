@@ -89,3 +89,4 @@ Use this table to map out and track your solved problems across LeetCode, Hacker
 * [ ] Master 5 core patterns per data structure.
 * [ ] Maintain clean, documented code with Time & Space complexities listed at the top of every file.
 * [ ] Complete **150+** curated standard interview problems.
+* [ ] Try to maintain regularity in problem solving .
