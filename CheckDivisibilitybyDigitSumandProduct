@@ -1,0 +1,15 @@
+class Solution {
+public:
+    bool checkDivisibility(int n) {
+        int org = n;
+        int sum = 0, mult = 1, rem ; 
+        while( n > 0){
+            rem = n % 10;
+            sum += rem;
+            mult *= rem;
+            n = n / 10; 
+        }
+        int total_sum = sum + mult;
+        return total_sum != 0 && org % total_sum == 0;
+    }
+};
