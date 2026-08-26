@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        // Corrected the template arguments for your min-heap
+        priority_queue<pair<int, vector<int>>, vector<pair<int, vector<int>>>, greater<pair<int, vector<int>>>> minpq;
+        
+        vector<vector<int>> ans;
+        for(int i = 0; i < points.size(); i++){
+            int sqr = (points[i][0] * points[i][0]) + (points[i][1] * points[i][1]);
+            minpq.push({sqr, points[i]});
+        }
+        while(k > 0){
+            ans.push_back(minpq.top().second);
+            minpq.pop();
+            k--;
+        }
+        return ans;
+    }
+};
