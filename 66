@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        unordered_map<string, int> mpp;
+        for(const string& word : words) {
+            mpp[word]++;
+        }
+
+        auto comp = [](const pair<int, string>& a, const pair<int, string>& b) {
+            if (a.first == b.first) {
+                return a.second < b.second; // Max-style comparison on string for min-heap tie-breaking
+            }
+            return a.first > b.first;       // Min-style comparison on frequency
+        };
+
+        priority_queue<pair<int, string>, vector<pair<int, string>>, decltype(comp)> pq(comp);
+
+        for(auto& it : mpp) {
+            pq.push({it.second, it.first});
+            if(pq.size() > k) {
+                pq.pop();
+            }
+        }
+
+        vector<string> ans(k);
+        for(int i = k - 1; i >= 0; i--) {
+            ans[i] = pq.top().second;
+            pq.pop();
+        }
+
+        return ans;
+    }
+};
