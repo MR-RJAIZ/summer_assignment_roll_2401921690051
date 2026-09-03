@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool checkValidString(string s) {
+        int cmin = 0; // Minimum possible open '('
+        int cmax = 0; // Maximum possible open '('
+        
+        for (char c : s) {
+            if (c == '(') {
+                cmax++;
+                cmin++;
+            } else if (c == ')') {
+                cmax--;
+                cmin--;
+            } else if (c == '*') {
+                cmax++; // Treat '*' as '('
+                cmin--; // Treat '*' as ')'
+            }
+            
+            // If the maximum possible open '(' drops below 0, 
+            // there are too many ')' to ever be valid.
+            if (cmax < 0) {
+                return false;
+            }
+            
+            // Minimum open '(' cannot be negative.
+            // If cmin < 0, it means we treated too many '*' as ')', 
+            // so we should treat them as empty strings instead.
+            if (cmin < 0) {
+                cmin = 0;
+            }
+        }
+        
+        // If the minimum required open '(' is exactly 0, the string is valid.
+        return cmin == 0;
+    }
+};
